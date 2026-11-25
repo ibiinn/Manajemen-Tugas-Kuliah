@@ -1,0 +1,85 @@
+Student API - Tugas 10 (PostgreSQL + Prisma)
+
+→ 1. Health Check
+  GET http://localhost:3000/ [200 OK, 482B, 15ms]
+  ✓  Status code 200
+  ✓  Server mengembalikan daftar endpoint
+
+→ 2. Get Semua Student
+  GET http://localhost:3000/api/students [200 OK, 1.3kB, 13ms]
+  ✓  Status code 200
+  ✓  Response sukses dan berisi data student
+
+→ 3. Filter by Jurusan (where)
+  GET http://localhost:3000/api/students?jurusan=informatika [200 OK, 720B, 3ms]
+  ✓  Status code 200
+  ✓  Semua data sesuai filter jurusan
+
+→ 4. Filter Angkatan + Search
+  GET http://localhost:3000/api/students?angkatan=2022&search=eka [200 OK, 545B, 3ms]
+  ✓  Status code 200
+  ✓  Filter angkatan dan search bekerja
+
+→ 5. Statistik Student (count/groupBy)
+  GET http://localhost:3000/api/students/stats [200 OK, 616B, 7ms]
+  ✓  Status code 200
+  ✓  Statistik berisi total dan rekap per jurusan
+
+→ 6. Get Detail Student (id = 2)
+  GET http://localhost:3000/api/students/2 [200 OK, 526B, 8ms]
+  ✓  Status code 200
+  ✓  Data student ditemukan
+
+→ 7. Get Detail Student - tidak ditemukan (id = 999)
+  GET http://localhost:3000/api/students/999 [404 Not Found, 341B, 2ms]
+  ✓  Status code 404
+  ✓  Pesan tidak ditemukan
+
+→ 8. Create Student
+  POST http://localhost:3000/api/students [201 Created, 541B, 5ms]
+  ✓  Status code 201
+  ✓  Student baru tersimpan di PostgreSQL
+
+→ 9. Create Student - NIM duplikat (409)
+  POST http://localhost:3000/api/students [409 Conflict, 338B, 3ms]
+  ✓  Status code 409
+  ✓  Pesan NIM sudah terdaftar
+
+→ 10. Create Student - data tidak valid (400)
+  POST http://localhost:3000/api/students [400 Bad Request, 394B, 1ms]
+  ✓  Status code 400
+  ✓  Ada daftar error validasi
+
+→ 11. Update Student
+  PUT http://localhost:3000/api/students/8 [200 OK, 531B, 4ms]
+  ✓  Status code 200
+  ✓  Data student berhasil diperbarui
+
+→ 12. Delete Student
+  DELETE http://localhost:3000/api/students/8 [200 OK, 529B, 3ms]
+  ✓  Status code 200
+  ✓  Student berhasil dihapus
+
+→ 13. Get Student Setelah Delete (404)
+  GET http://localhost:3000/api/students/8 [404 Not Found, 339B, 12ms]
+  ✓  Status code 404
+
+┌─────────────────────────┬─────────────────┬─────────────────┐
+│                         │        executed │          failed │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              iterations │               1 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│                requests │              13 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│            test-scripts │              13 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│      prerequest-scripts │               1 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              assertions │              25 │               0 │
+├─────────────────────────┴─────────────────┴─────────────────┤
+│ total run duration: 236ms                                   │
+├─────────────────────────────────────────────────────────────┤
+│ total data received: 3.68kB (approx)                        │
+├─────────────────────────────────────────────────────────────┤
+│ average response time: 6ms [min: 1ms, max: 15ms, s.d.: 4ms] │
+└─────────────────────────────────────────────────────────────┘
